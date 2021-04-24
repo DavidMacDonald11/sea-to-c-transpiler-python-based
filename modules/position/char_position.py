@@ -12,9 +12,9 @@ class CharPosition:
     def copy(self):
         return CharPosition(self.line, self.column)
 
-    def next(self):
-        self.column += 1
+    def advance(self, amount = 1):
+        self.column += amount
 
-    def next_line(self):
-        self.line += 1
+    def advance_line(self, amount = 1):
+        self.line += amount
         self.column = -1

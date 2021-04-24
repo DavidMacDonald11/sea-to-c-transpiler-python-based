@@ -1,3 +1,4 @@
+from r_lexer import errors
 from .token import Token
 
 class Literal(Token):
@@ -8,3 +9,20 @@ class Literal(Token):
 
     def __repr__(self):
         return f"Literal: {self.type} {self.value}"
+
+    @classmethod
+    def construct(cls, lexer):
+        token_string = lexer.take_while_allowed(cls.allowed())
+        dots = token_string.count(".")
+
+        if dots > 1:
+            raise errors.FloatError()
+
+        if dots == 1:
+            return Literal("float", token_string)
+
+        return Literal("int", token_string)
+
+    @classmethod
+    def allowed(cls):
+        return "0123456789."
