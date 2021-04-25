@@ -2,7 +2,7 @@ class Position:
     def __init__(self, stream, start = None, end = None):
         self.stream = stream
         self.start = start
-        self.end = end or start
+        self.end = end if end is not None else start
 
     def __repr__(self):
         if self.start is None:

@@ -1,4 +1,4 @@
-from modules.helpers.errors import SeaError
+from errors.errors import SeaError
 
 class LexerError(SeaError):
     lexer = None
@@ -6,13 +6,21 @@ class LexerError(SeaError):
     def get_position(self):
         return type(self).lexer.position
 
-class UnknownTokenError(LexerError):
-    def __init__(self, token, message = ""):
-        self.token = token
+class UnknownSymbolError(LexerError):
+    def __init__(self, symbol, message = ""):
+        self.symbol = symbol
         super().__init__(message)
 
     def get_message(self):
-        return f"Token \"{self.token}\" is undefined."
+        return f"Symbol \"{self.symbol}\" is unknown to the lexer."
+
+class UnknownOperatorError(LexerError):
+    def __init__(self, operator, message = ""):
+        self.operator = operator
+        super().__init__(message)
+
+    def get_message(self):
+        return f"Operator \"{self.operator}\" is unknown to the lexer."
 
 class IndentError(LexerError):
     def get_message(self):
@@ -21,12 +29,3 @@ class IndentError(LexerError):
 class FloatError(LexerError):
     def get_message(self):
         return "A float cannot contain more than one decimal point."
-
-class ImplicitCastWarning(LexerError):
-    def __init__(self, var_type, data_type, message = ""):
-        self.var_type = var_type
-        self.data_type = data_type
-        super().__init__(message)
-
-    def get_message(self):
-        return f"Implicit cast from {self.data_type} to {self.var_type}."

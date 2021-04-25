@@ -1,4 +1,4 @@
-from r_lexer import errors
+from lexer import errors
 from .token import Token
 
 class Literal(Token):

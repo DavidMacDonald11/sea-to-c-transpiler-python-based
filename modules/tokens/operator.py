@@ -1,5 +1,5 @@
 from enum import Enum, unique
-from r_lexer import errors
+from lexer import errors
 from .token import Token
 
 class Operator(Token):
