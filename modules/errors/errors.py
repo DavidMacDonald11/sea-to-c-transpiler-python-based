@@ -1,7 +1,7 @@
 class SeaError(Exception):
-    def __init__(self, message = ""):
+    def __init__(self, position = None, message = ""):
         self.message = message
-        self.position = "[No Position]"
+        self.position = position
         super().__init__(message)
 
     def get_message(self):

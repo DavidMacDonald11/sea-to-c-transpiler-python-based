@@ -3,8 +3,11 @@ from errors.errors import SeaError
 class LexerError(SeaError):
     lexer = None
 
-    def get_position(self):
-        return type(self).lexer.position
+    def __init__(self, position = None, message = ""):
+        if position is None:
+            position = type(self).lexer.position
+
+        super().__init__(position, message)
 
 class UnknownSymbolError(LexerError):
     def __init__(self, symbol, message = ""):
